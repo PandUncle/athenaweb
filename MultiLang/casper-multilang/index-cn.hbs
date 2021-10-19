@@ -2,7 +2,7 @@
 
 {{!-- The tag above means: insert everything in this file
 into the {body} of the default.hbs template --}}
-
+{{#contentFor "title"}}{{@site.title}}{{/contentFor}}
 <div class="site-header-content">
     {{#if @site.cover_image}}
         {{!-- This is a responsive image, it loads different sizes depending on device
