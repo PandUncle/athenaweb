@@ -1,0 +1,10 @@
+{
+  "development": {
+    "apiUrl": "https://himalayathena.com",
+    "contentApiKey": "8c0414fe582b158f718254e4ef"
+  },
+  "production": {
+    "apiUrl": "https://himalayathena.com",
+    "contentApiKey": "8c0414fe582b158f718254e4ef"
+  }
+}
