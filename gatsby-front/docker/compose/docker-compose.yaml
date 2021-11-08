@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  gatsby-front:
+    image: 167.71.149.87:28000/library/gatsby-front
+    container_name: gatsby-front
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "3"
+    ports:
+      - 8896:80
