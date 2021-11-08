@@ -9,5 +9,12 @@ services:
       options:
         max-size: "200k"
         max-file: "3"
+    networks:
+      nginxproxymanage_default:
+        ipv4_address: 172.20.0.99
     ports:
       - 8896:80
+
+networks:
+  nginxproxymanage_default:
+    external: true
