@@ -8,6 +8,8 @@ import { Loading } from '@/components/loading';
 import './index.less';
 
 export default function Home(props: any) {
+  const { setKey } = props;
+
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<any>();
 
@@ -31,7 +33,7 @@ export default function Home(props: any) {
     <div className="container">
       <section className="post-feed">
         {posts?.map((pt: any, idx: number) => {
-          return <PostCard key={idx} post={pt} />;
+          return <PostCard key={idx} post={pt} setKey={setKey} />;
         })}
       </section>
       <Pagination pageContext={posts?.meta?.pagination} />

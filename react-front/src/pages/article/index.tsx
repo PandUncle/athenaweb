@@ -32,6 +32,10 @@ export default function Article(props: any) {
         setLoading(false);
       }
     } else if (query.t === 'post') {
+      let id = query.s;
+      let art = await $api.posts.read({ id: id } as any);
+      setArt(art);
+      setLoading(false);
     }
   };
 

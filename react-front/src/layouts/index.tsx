@@ -126,7 +126,7 @@ const DefaultLayout = (props: any) => {
 
           <main className="site-main">
             {/* All the main content gets inserted here, index.js, post.js */}
-            {children}
+            {React.cloneElement(children, { setKey: setKey })}
           </main>
         </div>
 

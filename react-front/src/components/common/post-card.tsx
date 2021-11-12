@@ -1,18 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'umi';
+import { Link, history } from 'umi';
 // import { Tags } from '@tryghost/helpers-gatsby'
 // import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import { ellipsis } from '@/utils/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 const PostCard = (props: any) => {
-  const { post } = props;
+  const { post, setKey } = props;
 
-  const url = `/${post.slug}/`;
+  const url = `/s/article?s=${post.id}&t=post`;
   //   const readingTime = readingTimeHelper(post);
 
   return (
-    <Link to={url} className="post-card">
+    <a
+      onClick={() => {
+        setKey(uuidv4());
+        history.push(url);
+      }}
+      className="post-card"
+    >
       <header className="post-card-header">
         {post.feature_image && (
           <div
@@ -57,7 +64,7 @@ const PostCard = (props: any) => {
           {/* <div>{readingTime}</div> */}
         </div>
       </footer>
-    </Link>
+    </a>
   );
 };
 
