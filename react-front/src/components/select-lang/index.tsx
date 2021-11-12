@@ -4,7 +4,6 @@ import { Select, Popover, Button } from 'antd';
 import { $locale } from '@/utils/locale-utils';
 
 const getLangText = (lc: any) => {
-  console.log('getLangText: ', lc);
   const item = (ic: any, txt: string) => {
     return (
       <span>

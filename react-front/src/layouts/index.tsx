@@ -22,13 +22,9 @@ import './app.css';
 const DefaultLayout = (props: any) => {
   const { data, children, bodyClass, isHome } = props;
 
-  let pathname = window.location;
-  console.log('pathname: ', pathname);
-
-  // const site = data.allGhostSettings.edges[0].node;
-
   const [loading, setLoading] = useState<boolean>(true);
   const [site, setSite] = useState<any>();
+  const [key, setKey] = useState<any>(0);
 
   const fetchData = async () => {
     let settings = await $api.settings.browse();
@@ -42,7 +38,20 @@ const DefaultLayout = (props: any) => {
   }, []);
 
   return loading ? (
-    <Loading />
+    <div
+      style={
+        {
+          // width: '100%',
+          // display: 'flex',
+          // flexDirection: 'column',
+          // justifyContent: 'center',
+          // alignItems: 'center',
+          // color: '#000',
+        }
+      }
+    >
+      <Loading />
+    </div>
   ) : (
     <>
       <Helmet>
@@ -52,12 +61,13 @@ const DefaultLayout = (props: any) => {
       </Helmet>
 
       <div className="viewport">
-        <div className="viewport-top">
+        <div key={key} className="viewport-top">
           <div className="site-header-nav">
             <div>
               <Navigation
                 data={site.navigation}
                 navClass="site-foot-nav-item"
+                setKey={setKey}
               />
             </div>
             <div className="site-mast-right" style={{ marginRight: '10px' }}>

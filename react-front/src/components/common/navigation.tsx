@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'umi';
+import React, { useState } from 'react';
+import { Link, history } from 'umi';
 import { $T } from '@/utils/locale-utils';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Navigation component
@@ -13,7 +14,8 @@ import { $T } from '@/utils/locale-utils';
  *
  */
 const Navigation = (props: any) => {
-  const { data, navClass } = props;
+  const { data, navClass, setKey } = props;
+
   return (
     <>
       {data.map((navItem: any, i: number) => {
@@ -30,11 +32,53 @@ const Navigation = (props: any) => {
             </a>
           );
         } else {
-          return (
-            <Link className={navClass} to={navItem.url} key={i}>
-              {navItem.label}
-            </Link>
-          );
+          let path = navItem.url;
+          if (path == '/') {
+            return (
+              <a
+                key={i}
+                className={navClass}
+                onClick={() => {
+                  history.push(navItem.url);
+                }}
+              >
+                {navItem.label}
+              </a>
+            );
+          } else {
+            path = path.replace(/\//g, '*');
+            if (path.indexOf('tag') < 0) {
+              let toUrl = `/s/article?s=${path}&t=page`;
+              return (
+                <a
+                  key={i}
+                  className={navClass}
+                  onClick={() => {
+                    history.push(toUrl);
+                  }}
+                >
+                  {navItem.label}
+                </a>
+              );
+            } else {
+              // 对于tag
+              path = path.substring(4);
+              console.log('path tag:', path);
+              let toUrl = `/s/post?s=${path}&t=post`;
+              return (
+                <a
+                  key={i}
+                  className={navClass}
+                  onClick={() => {
+                    history.push(toUrl);
+                    setKey(uuidv4());
+                  }}
+                >
+                  {navItem.label}
+                </a>
+              );
+            }
+          }
         }
       })}
     </>

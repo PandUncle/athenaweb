@@ -10,7 +10,18 @@ export default [
       {
         path: '/s/home',
         component: '@/pages/home',
-        title: '首页',
+      },
+      {
+        path: '/s/tag',
+        component: '@/pages/tag',
+      },
+      {
+        path: '/s/article',
+        component: '@/pages/article',
+      },
+      {
+        path: '/s/post',
+        component: '@/pages/post',
       },
     ],
   },

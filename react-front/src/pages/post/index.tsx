@@ -3,20 +3,33 @@ import { getLocale } from 'umi';
 import Pagination from '@/components/common/pagination';
 import PostCard from '@/components/common/post-card';
 import { $api } from '@/core/api';
+import parse from 'url-parse';
+import queryString from 'query-string';
 import { locale2Tag } from '@/utils/utils';
 import { Loading } from '@/components/loading';
 import './index.less';
 
-export default function Home(props: any) {
+export default function Post(props: any) {
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<any>();
+  const [tag, setTag] = useState<any>();
 
-  let lc = locale2Tag(getLocale());
+  let href = window.location.href;
+  let url = parse(href);
+  let qs = url.hash.substring(9);
+  qs = qs.replace(/\*/g, '');
+  let query = queryString.parse(qs);
+
+  console.log('post query:', query);
 
   const fetchData = async () => {
+    let lc = locale2Tag(getLocale());
+    let slug = query.s;
+
+    console.log('lc+slug', lc, slug);
     let pts = await $api.posts.browse({
       include: ['tags', 'authors'],
-      filter: `tag:${lc}`,
+      filter: `tag:${slug}+tag:${lc}`,
     });
     setPosts(pts);
     console.log('posts', pts);

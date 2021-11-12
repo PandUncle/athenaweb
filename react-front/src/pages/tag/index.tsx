@@ -7,19 +7,23 @@ import { locale2Tag } from '@/utils/utils';
 import { Loading } from '@/components/loading';
 import './index.less';
 
-export default function Home(props: any) {
+export default function Tag(props: any) {
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<any>();
 
-  let lc = locale2Tag(getLocale());
+  let tag = locale2Tag(getLocale());
 
   const fetchData = async () => {
     let pts = await $api.posts.browse({
       include: ['tags', 'authors'],
-      filter: `tag:${lc}`,
+      filter: `tag:${tag}`,
     });
     setPosts(pts);
     console.log('posts', pts);
+
+    let pgs = await $api.pages.browse();
+    console.log('pgs', pgs);
+
     setLoading(false);
   };
 
