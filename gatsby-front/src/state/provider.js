@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export const AppContext = React.createContext();
 
 const Provider = (props) => {
-    const [lang, setLang] = useState("cn");
+    const [lang, setLang] = useState("#cn");
 
     return (
         <AppContext.Provider

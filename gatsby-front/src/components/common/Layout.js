@@ -5,6 +5,8 @@ import { Link, StaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import { Navigation } from ".";
 import config from "../../utils/siteConfig";
+import SelectLang from "../select-lang";
+import { AppContext } from "../../state/provider";
 
 // Styles
 import "../../styles/app.css";
@@ -26,6 +28,9 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const facebookUrl = site.facebook
         ? `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
         : null;
+
+    const { lang, changeLang } = useContext(AppContext);
+    console.log("lang:", lang);
 
     return (
         <>
@@ -68,7 +73,11 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                     </Link>
                                 </div>
                                 <div className="site-mast-right">
-                                    {site.twitter && (
+                                    <SelectLang
+                                        lang={lang}
+                                        changeLang={changeLang}
+                                    />
+                                    {/* {site.twitter && (
                                         <a
                                             href={twitterUrl}
                                             className="site-nav-item"
@@ -95,8 +104,8 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                                 alt="Facebook"
                                             />
                                         </a>
-                                    )}
-                                    <a
+                                    )} */}
+                                    {/* <a
                                         className="site-nav-item"
                                         href={`https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/`}
                                         target="_blank"
@@ -107,7 +116,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                             src="/images/icons/rss.svg"
                                             alt="RSS Feed"
                                         />
-                                    </a>
+                                    </a> */}
                                 </div>
                             </div>
                             {isHome ? (

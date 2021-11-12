@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 
@@ -15,10 +15,21 @@ import { AppContext } from "../state/provider";
  *
  */
 const Index = ({ data, location, pageContext }) => {
-    const posts = data.allGhostPost.edges;
-    const xxx = useContext(AppContext);
-    console.log("xxx:", xxx);
+    const [res, setRes] = useState();
 
+    const fetchData = async () => {
+        // console.log("graphql:", graphql);
+        // let rs = await graphql(pageQuery);
+        // console.log("rs:", rs);
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const posts = data.allGhostPost.edges;
+
+    // console.log("posts", posts);
     return (
         <>
             <MetaData location={location} />
@@ -49,11 +60,13 @@ Index.propTypes = {
 
 export default Index;
 
+//filter: { tags: { elemMatch: { slug: { eq: $slug } } } }
 // This page query loads all posts sorted descending by published date
 // The `limit` and `skip` values are used for pagination
 export const pageQuery = graphql`
     query GhostPostQuery($limit: Int!, $skip: Int!) {
         allGhostPost(
+            filter: { tags: { elemMatch: { name: { eq: "#en" } } } }
             sort: { order: DESC, fields: [published_at] }
             limit: $limit
             skip: $skip
