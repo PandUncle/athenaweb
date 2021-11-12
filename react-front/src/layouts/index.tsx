@@ -76,7 +76,7 @@ const DefaultLayout = (props: any) => {
           </div>
 
           <div>
-            <img src={site.cover_image} alt="" />
+            <img style={{ width: '100%' }} src={site.cover_image} alt="" />
           </div>
           {/* The main header section on top of the screen */}
 
