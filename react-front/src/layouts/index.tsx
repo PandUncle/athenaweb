@@ -24,12 +24,17 @@ const DefaultLayout = (props: any) => {
 
   const [loading, setLoading] = useState<boolean>(true);
   const [site, setSite] = useState<any>();
+  const [pages, setPages] = useState<any[]>([]);
   const [key, setKey] = useState<any>(0);
 
   const fetchData = async () => {
     let settings = await $api.settings.browse();
     setSite(settings);
     console.log('settings', settings);
+    // pages
+    let pgs = await $api.pages.browse();
+    setPages(pgs);
+    console.log('pages', pgs);
     setLoading(false);
   };
 
@@ -135,8 +140,19 @@ const DefaultLayout = (props: any) => {
           <footer className="site-foot">
             <div className="site-foot-nav container">
               <div className="site-foot-nav-left">
-                <Link to="/">{site.title}</Link> © 2021 &mdash; Published with
-                Athena
+                {pages.map((pg: any, idx: number) => {
+                  return (
+                    <span style={{ fontSize: '16px', fontWeight: 'bold' }}>
+                      <Link key={idx} to={`/s/article?s=*${pg.slug}*&t=page`}>
+                        {` · ${pg.title}`}
+                      </Link>
+                    </span>
+                  );
+                })}
+                <span style={{ fontSize: '16px', fontWeight: 'bold' }}>
+                  <Link to="/">{` · ${site.title}`}</Link> © 2021 &mdash;
+                  Published with Athena
+                </span>
               </div>
             </div>
           </footer>
