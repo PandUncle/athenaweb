@@ -21,8 +21,8 @@ const localeInit = () => {
   if (lang) {
     config.locale = lang;
   }
-  // 强制设置中文
-  let lc = config.locale ? config.locale : $locale.zhCN.code;
+  // 默认英文
+  let lc = config.locale ? config.locale : $locale.enUS.code;
   setLocale(lc, false);
   localStorage.setItem('locale', lc);
 };

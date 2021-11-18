@@ -41,7 +41,7 @@ export default function Article(props: any) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [qs]);
 
   return loading ? (
     <div style={{ margin: 'auto' }}>
