@@ -51,9 +51,8 @@ const sortPosts = (posts: any[]) => {
 };
 
 export default function Home(props: any) {
-  (document as any).title = 'News';
-
-  const { setKey } = props;
+  const { setKey, site } = props;
+  (document as any).title = site.title;
 
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<any>([]);

@@ -13,7 +13,8 @@ export default function Post(props: any) {
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<any>();
   const [tag, setTag] = useState<any>();
-  const { setKey } = props;
+  const { setKey, site } = props;
+  (document as any).title = site.title;
 
   let href = window.location.href;
   let url = parse(href);
