@@ -29,12 +29,14 @@ export default function Article(props: any) {
       });
       if (arts?.length > 0) {
         setArt(arts[0]);
+        (document as any).title = arts[0]?.title;
         setLoading(false);
       }
     } else if (query.t === 'post') {
       let id = query.s;
       let art = await $api.posts.read({ id: id } as any);
       setArt(art);
+      (document as any).title = art?.title;
       setLoading(false);
     }
   };
